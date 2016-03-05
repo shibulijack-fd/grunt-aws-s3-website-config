@@ -34,7 +34,7 @@ module.exports = function(grunt) {
         bucket: 'BUCKET_NAME',
         errorDocument: '404.html',
         indexDocument: 'index.html',
-        contentMD: '',
+        contentMD5: '',
         redirectJSON: 'redirects.json',
         parentJSONKey: 'RoutingRules'
       }

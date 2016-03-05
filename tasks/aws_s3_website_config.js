@@ -18,7 +18,7 @@
       bucket: '',
       errorDocument: '',
       indexDocument: '',
-      contentMD: '',
+      contentMD5: '',
       redirectJSON: 'redirects.json',
       parentJSONKey: 'RoutingRules'
     });
@@ -38,7 +38,7 @@
             },
             RoutingRules: redirects[options.parentJSONKey]
           },
-           ContentMD5: options.contentMD
+           ContentMD5: options.contentMD5
         };
         grunt.verbose.writeln(JSON.stringify(params, null, 2));
         
