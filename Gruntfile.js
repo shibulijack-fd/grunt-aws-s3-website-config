@@ -31,7 +31,12 @@ module.exports = function(grunt) {
     // Configuration to be run (and then tested).
     aws_s3_website_config: {
       options: {
-        bucket: 'freshdesk.en'
+        bucket: 'BUCKET_NAME',
+        errorDocument: '404.html',
+        indexDocument: 'index.html',
+        contentMD: '',
+        redirectJSON: 'redirects.json',
+        parentJSONKey: 'RoutingRules'
       }
     },
 
@@ -55,6 +60,6 @@ module.exports = function(grunt) {
   grunt.registerTask('test', ['clean', 'aws_s3_website_config', 'nodeunit']);
 
   // By default, lint and run all tests.
-  grunt.registerTask('default', ['aws_s3_website_config']);
+  grunt.registerTask('default', ['jshint','aws_s3_website_config']);
 
 };

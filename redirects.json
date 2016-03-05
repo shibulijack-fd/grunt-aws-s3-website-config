@@ -1,0 +1,20 @@
+{
+	"RoutingRules": [
+      {
+        "Redirect": { 
+          "ReplaceKeyPrefixWith": "ticketing/"
+        },
+        "Condition": {
+          "KeyPrefixEquals": "tour/"
+        }
+      },
+      {
+        "Redirect": { 
+          "ReplaceKeyPrefixWith": "signup/"
+        },
+        "Condition": {
+          "KeyPrefixEquals": "getstarted/"
+        }
+      }
+    ]
+}

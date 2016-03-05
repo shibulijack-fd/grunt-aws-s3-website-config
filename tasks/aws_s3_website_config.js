@@ -16,16 +16,17 @@
     var done = this.async();
     var options = this.options({
       bucket: '',
-      errorDocument: '404.html',
-      indexDocument: 'index.html',
-      contentMD: ''
+      errorDocument: '',
+      indexDocument: '',
+      contentMD: '',
+      redirectJSON: 'redirects.json',
+      parentJSONKey: 'RoutingRules'
     });
-
-    putBucketWebsite();
-    
+  
     function putBucketWebsite() {
 
         var s3 = new AWS.S3();
+        var redirects = grunt.file.readJSON(options.redirectJSON);
         var params = {
           Bucket: options.bucket, 
           WebsiteConfiguration: { 
@@ -35,23 +36,17 @@
             IndexDocument: {
               Suffix: options.indexDocument 
             },
-            RoutingRules: [
-            {
-              Redirect: { 
-                ReplaceKeyPrefixWith: 'ticketing/',
-              },
-              Condition: {
-                KeyPrefixEquals: 'tour/'
-              }
-            },
-            /* more items */
-            ]
+            RoutingRules: redirects[options.parentJSONKey]
           },
-           ContentMD5: option.contentMD
+           ContentMD5: options.contentMD
         };
+        grunt.verbose.writeln(JSON.stringify(params, null, 2));
+        
         s3.putBucketWebsite(params, done);
 
     }
+
+    putBucketWebsite();
 
   });
 
