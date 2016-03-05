@@ -11,12 +11,14 @@
 
  module.exports = function(grunt) {
 
-  grunt.registerMultiTask('aws_s3_website_config', 'Simple Grunt Plugin to modify AWS S3 Website Configurations', function() {
+  grunt.registerTask('aws_s3_website_config', 'Simple Grunt Plugin to modify AWS S3 Website Configurations', function() {
 
+    var done = this.async();
     var options = this.options({
       bucket: '',
       errorDocument: '404.html',
-      indexDocument: 'index.html'
+      indexDocument: 'index.html',
+      contentMD: ''
     });
 
     putBucketWebsite();
@@ -36,25 +38,18 @@
             RoutingRules: [
             {
               Redirect: { 
-                ReplaceKeyPrefixWith: '/ticketing/',
+                ReplaceKeyPrefixWith: 'ticketing/',
               },
               Condition: {
-                KeyPrefixEquals: '/tour/'
+                KeyPrefixEquals: 'tour/'
               }
             },
             /* more items */
             ]
           },
-          // ContentMD5: 'STRING_VALUE'
+           ContentMD5: option.contentMD
         };
-        s3.putBucketWebsite(params, function(err, data) {
-          if (err) {
-              grunt.log.ok(err, err.stack); // an error occurred
-            }
-            else {
-              grunt.fail.warn(data);           // successful response
-            }    
-          });
+        s3.putBucketWebsite(params, done);
 
     }
 
