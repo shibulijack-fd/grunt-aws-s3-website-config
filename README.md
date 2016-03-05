@@ -17,7 +17,7 @@ Once the plugin has been installed, it may be enabled inside your Gruntfile with
 grunt.loadNpmTasks('grunt-aws-s3-website-config');
 ```
 
-## The "aws_s3_website_config" task
+## AWS S3 Website Configurations
 
 ### Overview
 In your project's Gruntfile, add a section named `aws_s3_website_config` to the data object passed into `grunt.initConfig()`.
@@ -35,6 +35,16 @@ grunt.initConfig({
       }
     },
 });
+```
+
+### Configure the Access Keys
+Create your credentials file at *~/.aws/credentials* (*C:\Users\USER_NAME\.aws\credentials* for Windows users) and save the following lines after replacing the access key values with your own.
+
+```
+[default]
+
+aws_access_key_id = YOUR_ACCESS_KEY_ID
+aws_secret_access_key = YOUR_SECRET_ACCESS_KEY
 ```
 
 ### Options
