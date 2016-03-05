@@ -24,61 +24,85 @@ In your project's Gruntfile, add a section named `aws_s3_website_config` to the 
 
 ```js
 grunt.initConfig({
-  aws_s3_website_config: {
-    options: {
-      // Task-specific options go here.
+    aws_s3_website_config: {
+      options: {
+        bucket: 'BUCKET_NAME',
+        errorDocument: '404.html',
+        indexDocument: 'index.html',
+        contentMD5: '',
+        redirectJSON: 'redirects.json',
+        parentJSONKey: 'RoutingRules'
+      }
     },
-    your_target: {
-      // Target-specific file lists and/or options go here.
-    },
-  },
 });
 ```
 
 ### Options
 
-#### options.separator
+#### options.bucket [required]
 Type: `String`
-Default value: `',  '`
+Default value: ``
 
-A string value that is used to do something with whatever.
+Specify the S3 bucket name.
 
-#### options.punctuation
+#### options.errorDocument [optional]
 Type: `String`
-Default value: `'.'`
+Default value: ``
 
-A string value that is used to do something else with whatever else.
+Specify the Error Document for the website hosted on the S3 bucket.
+
+#### options.indexDocument [optional]
+Type: `String`
+Default value: ``
+
+Specify the Index Document for the website hosted on the S3 bucket.
+
+#### options.contentMD5 [optional]
+Type: `String`
+Default value: ``
+
+#### options.redirectJSON [required]
+Type: `String`
+Default value: `redirects.json`
+
+Specify the JSON file which contains the Routing Rule configurations. [Sample JSON] (https://github.com/shibulijack-fd/grunt-aws-s3-website-config/blob/master/redirects.json)
+
+#### options.parentJSONKey [optional]
+Type: `String`
+Default value: `RoutingRules`
+
+Specify a custom parent key for the Routing Rule configurations.
 
 ### Usage Examples
 
 #### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
+In this example, the default `redirectJSON` option is used to obtain Routing Rules configuration. So, the following config requires a `redirects.json` file in the top level directory.
 
 ```js
 grunt.initConfig({
-  aws_s3_website_config: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
+    aws_s3_website_config: {
+      options: {
+        bucket: 'BUCKET_NAME',
+        errorDocument: '404.html',
+        indexDocument: 'index.html'
+      }
     },
-  },
 });
 ```
 
 #### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
+In this example, the `redirectJSON` option is set to user defined path containing the JSON file which has the Routing Rules configuration.
 
 ```js
 grunt.initConfig({
-  aws_s3_website_config: {
-    options: {
-      separator: ': ',
-      punctuation: ' !!!',
+    aws_s3_website_config: {
+      options: {
+        bucket: 'BUCKET_NAME',
+        errorDocument: '404.html',
+        indexDocument: 'index.html',
+        redirectJSON: 'path/to/redirects.json'
+      }
     },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
 });
 ```
 
