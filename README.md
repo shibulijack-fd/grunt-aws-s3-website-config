@@ -1,5 +1,7 @@
 # grunt-aws-s3-website-config
 
+[![Join the chat at https://gitter.im/shibulijack-fd/grunt-aws-s3-website-config](https://badges.gitter.im/shibulijack-fd/grunt-aws-s3-website-config.svg)](https://gitter.im/shibulijack-fd/grunt-aws-s3-website-config?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 > Simple Grunt Plugin to modify AWS S3 Website Configurations
 
 ## Getting Started
